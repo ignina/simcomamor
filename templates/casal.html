@@ -2,10 +2,15 @@
 
 {% block content %}
 
+<div class="capa">
+    <img src="{{ foto }}">
+</div>
+
 <div class="container">
 
-    <h1>{{ casal|replace('-', ' ')|title }} 💍</h1>
-    <p>Nosso grande dia</p>
+    <h1>{{ dados.nome }} 💍</h1>
+    <p>{{ dados.data }}</p>
+    <p>{{ dados.local }}</p>
 
     <div class="grid">
 
@@ -27,6 +32,36 @@
         <a href="/presentes" class="item">
             <img src="/static/img/lista.png">
             <span>Presentes</span>
+        </a>
+
+        <a href="/recados" class="item">
+            <img src="/static/img/mural.png">
+            <span>Recados</span>
+        </a>
+
+        <a href="/agenda" class="item">
+            <img src="/static/img/agenda.png">
+            <span>Agenda</span>
+        </a>
+
+        <a href="/historia" class="item">
+            <img src="/static/img/historia.png">
+            <span>História</span>
+        </a>
+
+        <a href="/cerimonia" class="item">
+            <img src="/static/img/nossa_cerimonia.png">
+            <span>Cerimônia</span>
+        </a>
+
+        <a href="/musicas" class="item">
+            <img src="/static/img/musicas.png">
+            <span>Músicas</span>
+        </a>
+
+        <a href="/mais" class="item">
+            <img src="/static/img/mais_opcoes.png">
+            <span>Mais</span>
         </a>
 
     </div>
