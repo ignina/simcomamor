@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#6B7D6D">
+    <link rel="manifest" href="/static/manifest.json">
+
+    <title>SimComAmor</title>
+
+    <!-- RESPONSIVO (importantíssimo pro celular) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: #FAF9F7;
+            color: #3f4f44;
+        }
+
+        .container {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #6B7D6D;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .btn:hover {
+            background-color: #5a6a5c;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

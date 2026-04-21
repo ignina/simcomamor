@@ -1,0 +1,20 @@
+{
+  "name": "SimComAmor",
+  "short_name": "SimComAmor",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F7",
+  "theme_color": "#6B7D6D",
+  "icons": [
+    {
+      "src": "/static/img/icon196.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
