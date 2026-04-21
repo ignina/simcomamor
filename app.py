@@ -181,6 +181,18 @@ def criar_casal():
 
     return render_template("criar.html")
 
+# =================
+# ADMIN CASAL
+# =================
+@app.route('/admin')
+def admin():
+
+    conn = get_db()
+    casais = conn.execute("SELECT * FROM casais").fetchall()
+    conn.close()
+
+    return render_template("admin.html", casais=casais)
+
 # ------------------------
 # START
 # ------------------------

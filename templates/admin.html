@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Painel Admin 💻</h1>
+
+    <div style="margin-bottom: 20px;">
+        <a href="/criar" class="btn">Novo casal</a>
+    </div>
+
+    <ul style="text-align: left;">
+
+        {% for casal in casais %}
+            <li style="margin-bottom: 10px;">
+                <strong>{{ casal.nome }}</strong><br>
+                <a href="/{{ casal.slug }}">Ver site</a>
+            </li>
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+{% endblock %}
