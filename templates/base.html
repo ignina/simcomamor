@@ -18,8 +18,12 @@
         body {
             margin: 0;
             font-family: 'Georgia', serif;
-            background-color: #FAF9F7;
+            background-color: #ffffff; /* padrão das páginas */
             color: #3f4f44;
+        }
+
+        .home {
+            background-color: #F2F5F1; /* verde oliva bem clarinho */
         }
 
         .container {
@@ -68,7 +72,7 @@
     </style>
 </head>
 
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
     {% block content %}
     {% endblock %}
