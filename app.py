@@ -18,6 +18,7 @@ def get_db():
 # ------------------------
 def criar_tabela():
     conn = get_db()
+
     conn.execute("""
         CREATE TABLE IF NOT EXISTS casais (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,6 +28,13 @@ def criar_tabela():
             local TEXT
         )
     """)
+
+    # adiciona coluna foto se não existir
+    try:
+        conn.execute("ALTER TABLE casais ADD COLUMN foto TEXT")
+    except:
+        pass
+
     conn.commit()
     conn.close()
 
@@ -37,9 +45,9 @@ def criar_tabela():
 def inserir_casal():
     conn = get_db()
     conn.execute("""
-        INSERT OR IGNORE INTO casais (slug, nome, data, local)
-        VALUES (?, ?, ?, ?)
-    """, ("ana-e-joao", "Ana & João", "12 de Outubro de 2026", "Rio de Janeiro - RJ"))
+        INSERT OR IGNORE INTO casais (slug, nome, data, local, foto)
+        VALUES (?, ?, ?, ?, ?)
+    """, ("ana-e-joao", "Ana & João", "12 de Outubro de 2026", "Rio de Janeiro - RJ", "/static/img/capa_padrao.jpg"))
     conn.commit()
     conn.close()
 
