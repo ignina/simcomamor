@@ -166,11 +166,14 @@ def criar_casal():
         # cria slug automático
         slug = nome.lower().replace(" ", "-")
 
+        # foto padrão
+        foto = "/static/img/capa_padrao.jpg"
+
         conn = get_db()
         conn.execute("""
-            INSERT INTO casais (slug, nome, data, local)
-            VALUES (?, ?, ?, ?)
-        """, (slug, nome, data, local))
+            INSERT INTO casais (slug, nome, data, local, foto)
+            VALUES (?, ?, ?, ?, ?)
+        """, (slug, nome, data, local, foto))
         conn.commit()
         conn.close()
 
