@@ -3,7 +3,7 @@
   "short_name": "SimComAmor",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAF9F7",
+  "background_color": "#EEF2ED",
   "theme_color": "#6B7D6D",
   "icons": [
     {
