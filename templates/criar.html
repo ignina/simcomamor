@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Criar site do casal 💍</h1>
+
+    <form method="POST" class="form">
+
+        <input type="text" name="nome" placeholder="Ex: Ana & João" required>
+        <input type="text" name="data" placeholder="Data do casamento" required>
+        <input type="text" name="local" placeholder="Cidade / Local" required>
+
+        <button type="submit" class="btn">Criar site</button>
+
+    </form>
+
+</div>
+
+{% endblock %}
