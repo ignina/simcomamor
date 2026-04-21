@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>{{ casal|replace('-', ' ')|title }} 💍</h1>
+    <p>Nosso grande dia</p>
+
+    <div class="grid">
+
+        <a href="/rsvp" class="item">
+            <img src="/static/img/rsvp.png">
+            <span>RSVP</span>
+        </a>
+
+        <a href="/album" class="item">
+            <img src="/static/img/album.png">
+            <span>Álbum</span>
+        </a>
+
+        <a href="/localizacao" class="item">
+            <img src="/static/img/localizacao.png">
+            <span>Local</span>
+        </a>
+
+        <a href="/presentes" class="item">
+            <img src="/static/img/lista.png">
+            <span>Presentes</span>
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -6,6 +6,10 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route('/<casal>')
+def site_casal(casal):
+    return render_template("casal.html", casal=casal)
+
 @app.route('/rsvp')
 def rsvp():
     return "RSVP em construção"
