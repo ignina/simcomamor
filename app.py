@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 import sqlite3
-from flask import request, redirect
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -14,7 +14,7 @@ def get_db():
 
 
 # ------------------------
-# CRIAR TABELA
+# CRIAR / ATUALIZAR TABELA
 # ------------------------
 def criar_tabela():
     conn = get_db()
@@ -25,13 +25,19 @@ def criar_tabela():
             slug TEXT UNIQUE,
             nome TEXT,
             data TEXT,
-            local TEXT
+            local TEXT,
+            foto TEXT
         )
     """)
 
-    # adiciona coluna foto se não existir
+    # adiciona colunas novas automaticamente
     try:
-        conn.execute("ALTER TABLE casais ADD COLUMN foto TEXT")
+        conn.execute("ALTER TABLE casais ADD COLUMN data_criacao TEXT")
+    except:
+        pass
+
+    try:
+        conn.execute("ALTER TABLE casais ADD COLUMN data_validade TEXT")
     except:
         pass
 
@@ -39,17 +45,8 @@ def criar_tabela():
     conn.close()
 
 
-# ------------------------
-# INSERIR CASAL INICIAL
-# ------------------------
-def inserir_casal():
-    conn = get_db()
-    conn.execute("""
-        INSERT OR IGNORE INTO casais (slug, nome, data, local, foto)
-        VALUES (?, ?, ?, ?, ?)
-    """, ("ana-e-joao", "Ana & João", "12 de Outubro de 2026", "Rio de Janeiro - RJ", "/static/img/capa_padrao.jpg"))
-    conn.commit()
-    conn.close()
+# 🚨 IMPORTANTE: roda no Render
+criar_tabela()
 
 
 # ------------------------
@@ -75,89 +72,10 @@ def site_casal(casal):
 
     return render_template("casal.html", dados=dados)
 
-# =================
-# RSVP
-# =================
-@app.route('/rsvp')
-def rsvp():
-    return "RSVP em construção"
 
-# =================
-# PRESENTES
-# =================
-@app.route('/presentes')
-def presentes():
-    return "Lista de presentes em construção"
-
-# =================
-# ÁLBUM
-# =================
-@app.route('/album')
-def album():
-    return "Álbum em construção"
-
-# =================
-# RECADOS
-# =================
-@app.route('/recados')
-def recados():
-    return "Mural de recados em construção"
-
-# =================
-# AGENDA
-# =================
-@app.route('/agenda')
-def agenda():
-    return "Agenda em construção"
-
-# =================
-# LOCALIZAÇÃO
-# =================
-@app.route('/localizacao')
-def localizacao():
-    return "Localização em construção"
-
-# =================
-# HISTÓRIA
-# =================
-@app.route('/historia')
-def historia():
-    return "História do casal em construção"
-
-# =================
-# CONVITE
-# =================
-@app.route('/convite')
-def convite():
-    return "Convite digital em construção"
-
-# =================
-# CERIMÔNIA
-# =================
-@app.route('/cerimonia')
-def cerimonia():
-    return "Cerimônia em construção"
-
-# =================
-# MÚSICAS
-# =================
-@app.route('/musicas')
-def musicas():
-    return "Músicas em construção"
-
-# =================
-# MAIS OPÇÕES
-# =================
-@app.route('/mais')
-def mais():
-    return "Mais opções em construção"
-
-# =================
-# CRIAR SITE DO CASAL
-# =================
-from datetime import datetime, timedelta
-from flask import request, redirect, render_template
-
+# ------------------------
+# CRIAR CASAL
+# ------------------------
 @app.route('/criar', methods=['GET', 'POST'])
 def criar_casal():
 
@@ -166,13 +84,10 @@ def criar_casal():
         data = request.form['data']
         local = request.form['local']
         plano = int(request.form.get('plano', 6))
-        # cria slug automático
-        slug = nome.lower().replace(" ", "-")
 
-        # foto padrão
+        slug = nome.lower().replace(" ", "-")
         foto = "/static/img/capa_padrao.jpg"
 
-        # datas
         hoje = datetime.now()
         data_criacao = hoje.strftime("%d/%m/%Y")
 
@@ -183,7 +98,6 @@ def criar_casal():
 
         data_validade = validade.strftime("%d/%m/%Y")
 
-        # salvar no banco
         conn = get_db()
         conn.execute("""
             INSERT INTO casais (slug, nome, data, local, foto, data_criacao, data_validade)
@@ -192,22 +106,20 @@ def criar_casal():
         conn.commit()
         conn.close()
 
-        # mensagem para o usuário
         return f"""
         <h2>Site criado com sucesso 💍</h2>
         <p><strong>{nome}</strong></p>
-        <p>Seu site estará disponível até: <strong>{data_validade}</strong></p>
-        <p>Guarde este link:</p>
-        <p><a href="/{slug}">/{slug}</a></p>
-        <br>
-        <p>Para renovação: admin@simcomamor.com.br</p>
+        <p>Válido até: <strong>{data_validade}</strong></p>
+        <p><a href="/{slug}">Acessar site</a></p>
+        <p>Renovação: admin@simcomamor.com.br</p>
         """
 
     return render_template("criar.html")
 
-# =================
-# ADMIN CASAL
-# =================
+
+# ------------------------
+# ADMIN
+# ------------------------
 @app.route('/admin')
 def admin():
 
@@ -217,10 +129,9 @@ def admin():
 
     return render_template("admin.html", casais=casais)
 
+
 # ------------------------
-# START
+# START LOCAL
 # ------------------------
 if __name__ == '__main__':
-    criar_tabela()
-    inserir_casal()
     app.run(debug=True)
