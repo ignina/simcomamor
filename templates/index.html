@@ -69,4 +69,25 @@ function irParaSite(e){
 }
 </script>
 
+<script>
+function criarFlor() {
+    const flor = document.createElement("img");
+    flor.src = "/static/img/copo_leite.png";
+    flor.classList.add("flor");
+
+    flor.style.left = Math.random() * 100 + "vw";
+    flor.style.animationDuration = (6 + Math.random() * 6) + "s";
+    flor.style.opacity = Math.random();
+
+    document.body.appendChild(flor);
+
+    setTimeout(() => {
+        flor.remove();
+    }, 12000);
+}
+
+// frequência (quanto menor, mais flores)
+setInterval(criarFlor, 900);
+</script>
+
 {% endblock %}

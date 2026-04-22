@@ -139,6 +139,11 @@
             padding: 20px;
         }
 
+        .hero, .acesso {
+            position: relative;
+            z-index: 1;
+        }
+
         .hero h1 {
             font-size: 48px;
             margin-bottom: 10px;
@@ -193,6 +198,23 @@
             border-radius: 8px;
             border: 1px solid #ccc;
             margin-right: 10px;
+        }
+
+        .flor {
+            position: fixed;
+            top: -60px;
+            width: 28px;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 0;
+
+            animation: cair linear infinite;
+        }
+
+        @keyframes cair {
+            to {
+                transform: translateY(110vh);
+            }
         }
 
     </style>
