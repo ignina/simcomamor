@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-# ------------------------
 # CONEXÃO COM BANCO
 # ------------------------
 def get_db():
@@ -106,16 +105,12 @@ def criar_casal():
         conn.commit()
         conn.close()
 
-        return f"""
-        <h2>Site criado com sucesso 💍</h2>
-        <p><strong>{nome}</strong></p>
-        <p>Válido até: <strong>{data_validade}</strong></p>
-        <p><a href="/{slug}">Acessar site</a></p>
-        <p>Renovação: admin@simcomamor.com.br</p>
-        """
-
-    return render_template("criar.html")
-
+        return render_template(
+            "sucesso.html",
+            nome=nome,
+            data_validade=data_validade,
+            slug=slug
+        )
 
 # ------------------------
 # ADMIN
