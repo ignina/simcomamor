@@ -4,7 +4,8 @@
 
 <div class="container">
 
-    <h1>Criar site do casal 💍</h1>
+    <h1>Crie seu site de casamento 💍</h1>
+    <p>Escolha seu plano e comece agora</p>
 
     <form method="POST" class="form">
 
@@ -12,7 +13,28 @@
         <input type="text" name="data" placeholder="Data do casamento" required>
         <input type="text" name="local" placeholder="Cidade / Local" required>
 
-        <button type="submit" class="btn">Criar site</button>
+        <div class="planos">
+
+            <label class="plano">
+                <input type="radio" name="plano" value="6" required>
+                <strong>Plano Essencial</strong><br>
+                6 meses<br>
+                <span>R$ 49,90</span>
+            </label>
+
+            <label class="plano">
+                <input type="radio" name="plano" value="12">
+                <strong>Plano Premium</strong><br>
+                1 ano<br>
+                <span>R$ 79,90</span>
+            </label>
+            <p style="font-size: 14px; margin-top: 10px;">
+                Seu site ficará ativo conforme o plano escolhido. Após esse período, será necessário renovação.
+            </p>
+
+        </div>
+
+        <button type="submit" class="btn">Criar meu site agora 💍</button>
 
     </form>
 

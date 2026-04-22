@@ -155,6 +155,9 @@ def mais():
 # =================
 # CRIAR SITE DO CASAL
 # =================
+from datetime import datetime, timedelta
+from flask import request, redirect, render_template
+
 @app.route('/criar', methods=['GET', 'POST'])
 def criar_casal():
 
@@ -162,22 +165,43 @@ def criar_casal():
         nome = request.form['nome']
         data = request.form['data']
         local = request.form['local']
-
+        plano = int(request.form.get('plano', 6))
         # cria slug automático
         slug = nome.lower().replace(" ", "-")
 
         # foto padrão
         foto = "/static/img/capa_padrao.jpg"
 
+        # datas
+        hoje = datetime.now()
+        data_criacao = hoje.strftime("%d/%m/%Y")
+
+        if plano == 6:
+            validade = hoje + timedelta(days=180)
+        else:
+            validade = hoje + timedelta(days=365)
+
+        data_validade = validade.strftime("%d/%m/%Y")
+
+        # salvar no banco
         conn = get_db()
         conn.execute("""
-            INSERT INTO casais (slug, nome, data, local, foto)
-            VALUES (?, ?, ?, ?, ?)
-        """, (slug, nome, data, local, foto))
+            INSERT INTO casais (slug, nome, data, local, foto, data_criacao, data_validade)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (slug, nome, data, local, foto, data_criacao, data_validade))
         conn.commit()
         conn.close()
 
-        return redirect(f'/{slug}')
+        # mensagem para o usuário
+        return f"""
+        <h2>Site criado com sucesso 💍</h2>
+        <p><strong>{nome}</strong></p>
+        <p>Seu site estará disponível até: <strong>{data_validade}</strong></p>
+        <p>Guarde este link:</p>
+        <p><a href="/{slug}">/{slug}</a></p>
+        <br>
+        <p>Para renovação: admin@simcomamor.com.br</p>
+        """
 
     return render_template("criar.html")
 
