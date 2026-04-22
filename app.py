@@ -4,11 +4,6 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-import os
-
-if os.path.exists("simcomamor.db"):
-    os.remove("simcomamor.db")
-
 # ------------------------
 # CONEXÃO COM BANCO
 # ------------------------
