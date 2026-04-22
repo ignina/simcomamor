@@ -112,6 +112,9 @@ def criar_casal():
             slug=slug
         )
 
+    # 👇 ESSENCIAL
+    return render_template("criar.html")
+
 # ------------------------
 # ADMIN
 # ------------------------
