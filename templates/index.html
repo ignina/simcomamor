@@ -1,16 +1,72 @@
 {% extends "base.html" %}
 {% block body_class %}home{% endblock %}
+
 {% block content %}
 
-<div class="container">
+<!-- LOADER -->
+<div id="loader" class="loader">
+    <h2>Sim Com Amor 💍</h2>
+    <p>Preparando algo lindo pra você...</p>
+</div>
 
-    <h1>Sim Com Amor 💍</h1>
-    <p>Muito mais que um convite</p>
+<!-- CONTEÚDO -->
+<div id="conteudo" style="display:none;">
 
-    <div style="margin-top: 30px;">
-        <a href="/criar" class="btn">Criar meu site 💍</a>
+    <div class="hero">
+
+        <h1>Sim Com Amor 💍</h1>
+
+        <p class="sub">
+            Crie o site do seu casamento em minutos.<br>
+            Compartilhe cada detalhe com quem você ama.
+        </p>
+
+        <div class="acoes">
+            <a href="/criar" class="btn principal">Criar meu site</a>
+            <a href="#acessar" class="btn secundario">Já tenho meu site</a>
+        </div>
+
+    </div>
+
+    <!-- ACESSO -->
+    <div id="acessar" class="acesso">
+
+        <h3>Já criou seu site?</h3>
+
+        <form onsubmit="irParaSite(event)">
+            <input 
+                type="text" 
+                id="slug" 
+                placeholder="Digite seu link (ex: ana-e-joao)"
+                required
+            >
+            <button class="btn">Entrar</button>
+        </form>
+
     </div>
 
 </div>
+
+<!-- SCRIPT LOADER -->
+<script>
+window.onload = function() {
+    setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("conteudo").style.display = "block";
+    }, 1500);
+}
+</script>
+
+<!-- SCRIPT ACESSO -->
+<script>
+function irParaSite(e){
+    e.preventDefault();
+    let slug = document.getElementById("slug").value.trim();
+
+    if(slug){
+        window.location.href = "/" + slug;
+    }
+}
+</script>
 
 {% endblock %}
