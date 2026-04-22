@@ -85,7 +85,7 @@ def criar_casal():
         plano = int(request.form.get('plano', 6))
 
         slug = nome.lower().replace(" ", "-")
-        foto = "/static/img/capa_padrao.jpg"
+        foto = request.form.get('foto') or "/static/img/capa_padrao.jpg"
 
         hoje = datetime.now()
         data_criacao = hoje.strftime("%d/%m/%Y")
